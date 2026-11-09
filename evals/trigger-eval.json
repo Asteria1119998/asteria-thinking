@@ -1,0 +1,82 @@
+[
+  {
+    "query": "我这个 prompt 第一次跑出来很好，后面三次都不行，是不是模型变了？prompt 我贴在下面：……",
+    "should_trigger": true
+  },
+  {
+    "query": "我们要上一个 RAG 知识库给客服用，帮我把方案的边界和失败点先摊开，别急着给架构。",
+    "should_trigger": true
+  },
+  {
+    "query": "A/B 测试跑了一天，B 组转化率高 2%，产品那边催着全量上线，我该怎么回他们？",
+    "should_trigger": true
+  },
+  {
+    "query": "agent 的评测分从 71 涨到 78，这改动算有效吗？我只跑了一次",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我把这个需求变成可执行的 spec，先别写代码：做一个自动把会议录音转成待办事项的工具",
+    "should_trigger": true
+  },
+  {
+    "query": "review 一下 CC 刚生成的这个 300 行脚本，我主要想知道它哪儿会炸，不是让你改",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我设计一个客服 agent，要求有帮助但绝对不能瞎编",
+    "should_trigger": true
+  },
+  {
+    "query": "为什么同样的 system prompt，在 Claude 上稳，在另一个模型上就经常跑偏？想搞清楚原因再决定要不要换",
+    "should_trigger": true
+  },
+  {
+    "query": "我想请你用深层结构分类一下这个问题：我们的检索召回在新文档上明显变差",
+    "should_trigger": true
+  },
+  {
+    "query": "老板让我写一个'让 AI 永远不犯错'的流程文档，我觉得这话有问题但说不清哪儿有问题",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我写个 Python 脚本，把 data.csv 按 date 列升序排序后另存为 sorted.csv。",
+    "should_trigger": false
+  },
+  {
+    "query": "把这段代码的变量名改规范一点，别动逻辑",
+    "should_trigger": false
+  },
+  {
+    "query": "解释一下 transformer 里的 attention 是怎么工作的，我要给实习生讲",
+    "should_trigger": false
+  },
+  {
+    "query": "给我写个正则，匹配中国大陆手机号",
+    "should_trigger": false
+  },
+  {
+    "query": "写一封给客户的催款邮件，语气客气但明确",
+    "should_trigger": false
+  },
+  {
+    "query": "这个报错是什么意思：KeyError: 'date'，就一行",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我把这份会议纪要整理成三条要点",
+    "should_trigger": false
+  },
+  {
+    "query": "用 pandas 怎么按两列分组求和？给个例子就行",
+    "should_trigger": false
+  },
+  {
+    "query": "什么是 sampling variance？一句话解释",
+    "should_trigger": false
+  },
+  {
+    "query": "把下面这段英文规格翻译成中文",
+    "should_trigger": false
+  }
+]

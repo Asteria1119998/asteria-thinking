@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: tier2-delete-originals
+expected_outcome: |
+  删除原图使不可逆=1，其余轴 0 → 二档：结构分类≤3行、差距≤3行、关键决策与失败点≤5行（在代码之前）、假设/检验≤3条；关键决策里有保护不可逆操作的措施（如先转换校验再删、dry-run）。
