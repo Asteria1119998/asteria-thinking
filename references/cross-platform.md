@@ -1,9 +1,10 @@
 # Cross-Platform Usage
 
 ## Claude / Grok
-Place the entire `deep-structure-thinking/` folder in the skills directory.
-The model will load SKILL.md when the description matches.
-Instruct it to run `scripts/validate_output.py` on its own draft when appropriate.
+Place the entire folder in the skills directory, renamed to `asteria-thinking/` (Claude Code requires the folder name to match the `name` in SKILL.md).
+The model will load SKILL.md when the description matches. Every response then starts with the banner
+`【Asteria思维模型】档位：…｜主类型：…`, which declares the tier the model chose; reply "用三档" / "一档就行" to override.
+Instruct it to run `scripts/validate_output.py` on its finished draft (not before writing it).
 
 ## GPT (ChatGPT, GPTs, Projects)
 - Paste the contents of `portable-core.md` into Custom Instructions or Project knowledge.

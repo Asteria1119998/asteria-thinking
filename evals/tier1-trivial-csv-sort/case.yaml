@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: tier1-trivial-csv-sort
+expected_outcome: |
+  四轴全 0 → 一档：横幅 + 一行结构卡 + 脚本，前置不超过 5 行；检验字段写的是实际运行结果；脚本在 data.csv 上产出 2026-01-20 / 02-11 / 03-05 的顺序。
+context:
+  scaffold_script: place-files.sh

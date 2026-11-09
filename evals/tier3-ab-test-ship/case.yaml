@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: tier3-ab-test-ship
+expected_outcome: |
+  上线不可逆且影响面广 → 三档；主类型 Sampling（一天、样本量未知、2% 可能在噪声内），次 Distribution（周内效应）；给出判断所需数据（样本量、区间、分段），并要么问 ≤3 道多选题，要么给出带不确定性标注的建议。

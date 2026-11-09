@@ -1,5 +1,5 @@
 {
-  "skill": "deep-structure-thinking",
+  "skill": "asteria-thinking",
   "test_cases": [
     {"input": "classify this problem by deep structure", "should_trigger": true},
     {"input": "don't just give me code, show the gap first", "should_trigger": true},

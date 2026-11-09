@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-09 — v2：品牌横幅、档位、分流、校验器重写
+- skill 标识改名：`deep-structure-thinking` → `asteria-thinking`（SKILL.md name、评测 tags、文档中的文件夹名与 `claude plugin eval` 路径）；方法名 Deep Structure Thinking 与横幅品牌「Asteria思维模型」不变；安装时文件夹须命名为 `asteria-thinking`
+- 新增 `scripts/selftest.sh` ＋ `scripts/selftest/`：15 份探针（文件名前缀 PASS_/FAIL_ 为期望结果），改校验器后跑一遍
+- 开场横幅（强制第一行）：`【Asteria思维模型】档位：…｜主类型：…`，替代"我已加载…"的寒暄；品牌、档位、主类型一行声明，用户一个词可改档
+- 档位（刻度）：四轴（不可逆／影响面／歧义度／盲反馈）定档；一档·结构卡（一行）／二档·精简（四节带行数上限，设计＋字段图合并为"关键决策与失败点"）／三档·完整（八节）；澄清协议归三档
+- 分类分流：每个结构类型附"分类后额外必做"；补 Sampling／Distribution、Data／Specification、Optimization／Specification 的边界判据；Mixed 按主类型分流
+- `validate_output.py` v2：识别横幅与档位并按档检查；接受 `## 1.`／`## 一、`／`**1. 结构分类**`／`## **结构分类**` 等写法；章节正文按 markdown 层级提取（### 子标题不截断）；空壳章节判失败（长度下限＋结构分类须有类型词与理由＋假设节须有检验与修正）；代码检测只认带语言标签或读起来像代码的围栏（去掉"方案"等词触发）；设计／字段图必须在第一个代码围栏之前；识别澄清协议（≥2 个选项）时不要求设计／字段图；`--tier`、`--lang zh|en|auto`、`--json`
+- `fieldmap_template.py`：中文骨架；`--compact` 输出二档合并版
+- 新增示例：一档结构卡（排序脚本）、二档精简（删旧日志），示例中的检验结果为实际运行结果；原两份示例改中文标题并标注用途
+- 反模式新增：档位错配、对着校验器写字、贴标签不分流
+- description 改为中英双语并以品牌开头，删去正文中的"何时使用"段（触发条件只放 description）；原 description 列出的 "probability" 不在分类法中，已对齐为五类
+- README／portable-core 与 SKILL.md 对齐；README 补解压后改名说明
+- 未动：语言规则仍为"标题与正文中文"（英文用户场景待定）；evals.json 原样保留
+
 ## 2026-11-04
 - Initial skill creation
 - Core workflow: structure classification → intent/spec/gap → design/field map → hypothesis-test-correct
