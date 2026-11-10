@@ -1,4 +1,4 @@
-【Asteria思维模型】档位：三档·完整（歧义·盲反馈）｜主类型：Sampling（次：Specification）
+【Asteria思维模型】档位：三档·完整（按建议·歧义·盲反馈）｜主类型：Sampling（次：Specification）
 
 **1. 结构分类**
 主类型 Sampling，因为四次运行只看到一次成功，n=4 的成功率区间极宽（约 5%–72%），不能支持"本来能用、后来坏了"的因果故事；次类型 Specification：成功标准未事先写死。

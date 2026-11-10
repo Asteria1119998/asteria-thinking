@@ -78,5 +78,9 @@
   {
     "query": "把下面这段英文规格翻译成中文",
     "should_trigger": false
+  },
+  {
+    "query": "这段支付回调的代码明天上线，帮我做一次正式的 code review，确认没有安全问题",
+    "should_trigger": true
   }
 ]

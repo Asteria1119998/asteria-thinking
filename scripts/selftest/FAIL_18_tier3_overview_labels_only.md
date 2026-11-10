@@ -1,4 +1,4 @@
-【Asteria思维模型】档位：三档·完整（歧义·盲反馈）｜主类型：Sampling（次：Specification）
+【Asteria思维模型】档位：三档·完整（按建议·歧义·盲反馈）｜主类型：Sampling（次：Specification）
 
 ```
 总图：结论

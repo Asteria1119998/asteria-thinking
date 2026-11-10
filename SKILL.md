@@ -1,6 +1,6 @@
 ---
 name: asteria-thinking
-description: Asteria思维模型（Asteria Thinking Model）—— 先按深层结构（Sampling／Distribution／Optimization／Data／Specification）给问题分类，再按风险档位（一档结构卡／二档精简／三档完整）决定分析深度；把意图转成可执行规格并点名意图-指令差距；每个主张配假设/检验/修正；三档中代码前必须有设计＋字段图。Use whenever the user asks why something worked once but not again, whether a score change or a single success means anything, wants to design an agent/prompt/workflow/system, wants AI-generated code or a plan reviewed for failure points, wants a vague requirement turned into a spec before coding, or makes any non-trivial request where jumping straight to a solution could be wrong in a way that is costly to undo — even when they do not name the skill.
+description: Asteria思维模型（Asteria Thinking Model）—— 先按深层结构（Sampling／Distribution／Optimization／Data／Specification）给问题分类，再按风险档位（一档结构卡／二档精简／三档完整）决定分析深度；把意图转成可执行规格并点名意图-指令差距；每个主张配假设/检验/修正；三档中代码前必须有设计＋字段图。Use whenever the user asks why something worked once but not again, whether a score change or a single success means anything, wants to design an agent/prompt/workflow/system, wants AI-generated code or a plan checked for failure points, including when they ask for a code review (the skill gives a reading-level check and says plainly that it is not a formal engineering review), wants a vague requirement turned into a spec before coding, or makes any non-trivial request where jumping straight to a solution could be wrong in a way that is costly to undo — even when they do not name the skill.
 ---
 
 # Asteria思维模型（Deep Structure Thinking）
@@ -41,6 +41,8 @@ description: Asteria思维模型（Asteria Thinking Model）—— 先按深层�
 ```
 【Asteria思维模型】档位：<一档·结构卡|二档·精简|三档·完整>（<用户指定|按建议|自动>·<触发轴>）｜主类型：<类型>（次：<类型>）
 ```
+
+括号里先写来源，再写触发轴；来源是"用户指定"时触发轴可省，零分时触发轴写"零分"。
 
 例：
 
@@ -167,7 +169,7 @@ Sampling 与 Distribution 的边界：补更多样本就能解决的，是 Sampl
 
 **字段图**（Field Map）：一张让读者不看代码也能看出"它在动哪些东西、哪里会错"的图——关键变量／状态；转换（状态如何变）；可能的失败点；Sampling 或 variance 顾虑。模板见 `scripts/fieldmap_template.py`（`--compact` 输出二档的合并版）。
 
-审查 AI 生成的代码时，先出字段图，对比代码声称要做的与实际做的。
+读 AI 生成的代码时，先出字段图，对比代码声称要做的与实际做的。这是阅读级的检查，范围见下文"边界"。
 
 ## 5. 假设 / 检验 / 修正
 
@@ -181,10 +183,49 @@ Sampling 与 Distribution 的边界：补更多样本就能解决的，是 Sampl
 
 它检查的是**下限**：横幅与档位是否声明；二档、三档的总图是否存在、是否覆盖了后文的章节；该档位要求的章节是否存在且非空壳（有类型词与理由、有检验与修正、长度不是一句话）；代码围栏是否出现在设计／字段图之前；标题是否中文。它不检查你想得对不对。
 
+定档那一轮（只有记分和选项）不是正式回复，不用校验。
+
 两条使用纪律：
 
 - 写完再跑，不要先读校验规则再写。对着正则写出来的章节会通过校验，但那正是本 skill 反对的"优化代理指标"。
 - PASS 不等于想清楚了。校验失败→重写；校验通过→再读一遍自己的差距与失败点。
+
+## 边界（如实告诉用户）
+
+本 skill 只管一件事：一个问题提出来时，怎么把它想清楚。为了让多数人都能用，它在窄域任务上做了压缩和兼容，下面两种情况超出它的范围：
+
+```
+用户要正式的工程代码审查（安全、并发、性能、依赖、测试覆盖、上线前把关）
+  环境里有专门的工程审查 skill，并且它能处理这次的输入
+  （不限 Asteria 系列，宿主自带或用户安装的都算）
+    → 调用它处理这个请求；本 skill 不再输出，也不问档位
+  没有，或者它处理不了这次的输入
+  （例如它只看 git diff 或 PR，而代码是贴在对话里的）
+    → 照常定档，输出阅读级的字段图和失败点，回复末尾加一句边界提示
+
+分析中碰到用户不懂的概念
+  用户只是需要知道它是什么才能继续
+    → 三四行讲清，继续分析；不转交，不提示
+  用户明说想把它学会
+    有 asteria-learning 可用
+      → 调用它；学完回到分析，先用一行说明刚学的内容改变了哪一步
+    没有
+      → 三四行讲清与当前分析有关的那一块，继续分析，回复末尾加一句边界提示
+```
+
+边界提示各是一句话，照抄：
+
+```
+边界：这是阅读级检查，不覆盖安全、并发、性能和测试覆盖，正式审查需要专门的工程 skill 或工程师；Asteria 系列的工程 skill 单独提供。
+边界：系统地学这一块属于 Asteria学习模式（先说你的理解、复述批改、学习卡）。
+```
+
+- 每种提示每个对话只说一次，放在回复末尾，不展开。
+- 整个对话里第一次出现边界提示时，在它下面加一行 `Asteria 系列：https://github.com/Asteria1119998/asteria-thinking`，只加这一次。各 skill 的名字、状态和入口写在那里的 README，提示里不写，免得过时。
+- "调用"指用宿主提供的方式把请求交给那个 skill。调用不了时，告诉用户它的名字，请用户改用它。
+- 是否属于正式代码审查，在定档之前判断：要转交就直接转交，不先问档位。
+
+为什么要说：阅读级字段图能让非工程背景的人看懂代码在动什么。明显的问题它看得出来，比如把用户输入直接拼进 SQL，看到了就要指出。但它不保证看全：竞态、注入的各种变体、资源泄漏这类问题，要靠专业训练和工具才能系统地找出来。所以可以说"我看到了这些问题"，不能说"没有问题"。
 
 ## 反模式（禁止）
 
@@ -196,6 +237,7 @@ Sampling 与 Distribution 的边界：补更多样本就能解决的，是 Sampl
 - 档位错配：小任务套三档（税），不可逆操作套一档（风险）
 - 新任务不问档位就直接输出（三种跳过情形除外），或问完档位又在同一条消息里开始分析
 - 对着校验器写字：为了通过校验调整措辞或回避触发词
+- 把阅读级的字段图说成工程审查结论（"代码没有安全问题"）
 
 ## 检索场景额外要求
 

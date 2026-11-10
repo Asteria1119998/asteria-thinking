@@ -1,4 +1,4 @@
-【Asteria思维模型】档位：二档·精简（不可逆）｜主类型：Data（次：Specification）
+【Asteria思维模型】档位：二档·精简（按建议·不可逆）｜主类型：Data（次：Specification）
 
 ```
 总图：可以删，但先 dry-run，列表看过再真删
