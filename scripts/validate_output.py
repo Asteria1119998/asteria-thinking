@@ -4,6 +4,7 @@ Asteria思维模型 / asteria-thinking — 下限校验器（v2）
 
 检查一份回复是否满足所声明档位的"形"的下限：
   * 第一行横幅：品牌 + 档位 + 主类型
+  * 二档、三档：横幅后的总图（代码块，根节点一句话结论，节点覆盖后文章节）
   * 该档位要求的章节存在、顺序正确、不是空壳
   * 结构分类里有类型词和理由；假设节里有检验和修正
   * 有代码时，设计/字段图（二档：关键决策与失败点）出现在第一个代码围栏之前
@@ -159,6 +160,22 @@ def detect_banner(lines: List[str]) -> Tuple[Optional[int], Optional[int], Optio
     return None, None, None, warnings
 
 
+def display_width(s: str) -> int:
+    import unicodedata
+    return sum(2 if unicodedata.east_asian_width(ch) in ("W", "F") else 1 for ch in s)
+
+
+def find_overview(lines, fences, banner_line):
+    """横幅之后第一个首行为「总图」的围栏块 → (start, end, body_lines)；没有则 None"""
+    for (s, e, lang, content) in fences:
+        if banner_line is not None and s < banner_line:
+            continue
+        body = [l for l in content if l.strip()]
+        if body and re.match(r"^\s*总图", body[0]):
+            return s, e, body
+    return None
+
+
 def first_section(headings: List[Heading], kind: str) -> Optional[Heading]:
     for h in headings:
         if kind in h.kinds:
@@ -238,6 +255,39 @@ def validate(text: str, tier_override: Optional[int] = None, lang: str = "zh") -
             errors.append(f"{where}没有检验（需写出怎么测、可观察的结果）")
         if not re.search(FIX_WORDS, s):
             errors.append(f"{where}没有修正（测试失败要改什么）")
+
+    # --- 总图（二档、三档）---
+    ov = find_overview(lines, fences, banner_line)
+    if tier in (2, 3):
+        if ov is None:
+            errors.append("缺少总图：横幅之后、第一个章节之前要有代码块，首行「总图：<一句话结论>」，节点为后文各章节的结论")
+        else:
+            s, e, body = ov
+            if headings and s > headings[0].line_no:
+                errors.append("总图位置错误：必须在第一个章节之前、紧跟横幅")
+            tree = [l for l in body[1:] if re.match(r"^\s*[├└│]", l)]
+            if len(tree) < 2:
+                errors.append("总图至少要有 2 个节点（├─ / └─ 开头的行）")
+            root = re.sub(r"^\s*总图\s*[:：]?\s*", "", body[0]).strip()
+            if len(root) < 4:
+                warnings.append("总图根节点应是整个回复的一句话结论，不只是「总图」两个字")
+            need = {2: ["结构分类", "差距", "假设"], 3: ["结构分类", "意图", "规格", "差距", "假设"]}[tier]
+            if has_code:
+                need.append("关键决策" if tier == 2 else "设计")
+                if tier == 3:
+                    need.append("字段图")
+            blob = "\n".join(body)
+            missing = [k for k in need if k not in blob and not (k == "关键决策" and ("设计" in blob and "字段图" in blob))]
+            if missing:
+                errors.append("总图没有覆盖后文章节：" + "、".join(missing) + "（每个章节一个节点，写该节结论）")
+            wide = [l for l in body if display_width(l) > 64]
+            if wide:
+                warnings.append(f"总图有 {len(wide)} 行超过约 30 个汉字宽，手机或微信里会折行")
+            labels_only = [l for l in tree if re.match(r"^\s*[├└]─\s*[^：:]{1,8}\s*$", l)]
+            if labels_only and len(labels_only) >= max(2, len(tree) // 2):
+                errors.append("总图节点只有标题没有结论（如「├─ 结构分类」）：每个节点要写该节的结论")
+    elif ov is not None:
+        warnings.append("一档不需要总图：结构卡那一行就是总图")
 
     # --- 分档检查 ---
     if tier == 1:

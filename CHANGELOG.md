@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-10 — v2.1：总图
+- 二档、三档在横幅之后必须有「总图」：代码块，根节点为整个回复的一句话结论，每个节点为后文一个章节的结论（不是标题），顺序一致；顺延章节标"（顺延）"；只用 `├─ └─ │`，行首对齐，每行 ≤30 汉字宽；后文若推翻总图，在末尾加「总图更正：…」。一档不画（结构卡即总图）
+- 校验器：二档、三档缺总图／总图在章节之后／节点少于 2／节点未覆盖该档必需章节／节点只有标题没有结论 → FAIL；行过宽 → WARN；一档出现总图 → WARN
+- 自测：原二、三档探针补总图；新增 FAIL_16（无总图）、FAIL_17（总图漏章节）、FAIL_18（节点只有标题）
+- 示例：二档示例补总图；README、portable-core 同步
+- 未动：其余配图（记分条、分叉图、状态流、判定树）待总图用过再定
+
 ## 2026-11-09 — v2：品牌横幅、档位、分流、校验器重写
 - skill 标识改名：`deep-structure-thinking` → `asteria-thinking`（SKILL.md name、评测 tags、文档中的文件夹名与 `claude plugin eval` 路径）；方法名 Deep Structure Thinking 与横幅品牌「Asteria思维模型」不变；安装时文件夹须命名为 `asteria-thinking`
 - 新增 `scripts/selftest.sh` ＋ `scripts/selftest/`：15 份探针（文件名前缀 PASS_/FAIL_ 为期望结果），改校验器后跑一遍
