@@ -5,4 +5,4 @@ timeout_seconds: 900
 allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
 ---
 
-我这个 prompt 第一次跑出来很好，后面三次都不行，是不是模型变了？
+我这个 prompt 第一次跑出来很好，后面三次都不行，是不是模型变了？（按建议档位直接输出，不用问我选档。）

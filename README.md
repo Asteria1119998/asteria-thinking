@@ -6,7 +6,16 @@
 
 > 不要把一次好结果当成能力，不要把模糊意图直接变成指令，不要在没看清失败点之前就写方案或代码。
 
-加载后你会看到的第一行永远是：
+每个新任务它先用一行问你要多深，你回一个数字：
+
+```
+【Asteria思维模型】定档
+不可逆 ■  影响面 □  歧义度 □  盲反馈 ■  → 建议：三档
+1 一档·结构卡  2 二档·精简  3 三档·完整
+回 1 / 2 / 3，或回"按建议"。
+```
+
+想省掉这一问，在提问时直接点名档位（"用三档：……"）。之后正式回复的第一行永远是：
 
 ```
 【Asteria思维模型】档位：二档·精简（不可逆）｜主类型：Data（次：Specification）
@@ -76,7 +85,7 @@
 git clone https://github.com/Asteria1119998/asteria-thinking ~/.claude/skills/asteria-thinking
 ```
 
-新开会话即可：输入 `/asteria-thinking 你的问题`，或在匹配的问题上自动触发。更新：`git -C ~/.claude/skills/asteria-thinking pull`。要给某个项目的所有协作者用：把 Release 的 asteria-thinking.zip 解压到该项目的 `.claude/skills/` 下（得到不含 .git 的 `.claude/skills/asteria-thinking/`），提交进项目，clone 项目的人就自动拥有；更新时重新解压覆盖。不要在项目里直接 `git clone` 本仓库——外层项目只会记录一个指针，别人 clone 下来是空目录。
+新开会话即可：输入 `/asteria-thinking 你的问题`，或在匹配的问题上自动触发。更新：`git -C ~/.claude/skills/asteria-thinking pull`。要给某个项目的所有协作者用：把 Release 的 asteria-thinking.zip 解压到该项目的 `.claude/skills/` 下（得到不含 .git 的 `.claude/skills/asteria-thinking/`），提交进项目，clone 项目的人就自动拥有；更新时先删掉旧的 `asteria-thinking/` 文件夹再解压，避免旧版本的文件残留。不要在项目里直接 `git clone` 本仓库——外层项目只会记录一个指针，别人 clone 下来是空目录。
 
 **claude.ai / Claude Desktop**：到 [Releases](https://github.com/Asteria1119998/asteria-thinking/releases) 下载 `asteria-thinking.zip`，在设置里的 Skills 上传。这个 zip 的顶层就是 `asteria-thinking/` 文件夹；不要用 GitHub 自动生成的 Source code zip——它解压出来叫 `asteria-thinking-main`，Claude 要求文件夹名与 SKILL.md 的 `name` 一致。
 

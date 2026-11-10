@@ -5,4 +5,4 @@ timeout_seconds: 900
 allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
 ---
 
-Write a Python script that scrapes this site and saves to CSV
+Write a Python script that scrapes this site and saves to CSV (Use the recommended tier and answer directly; do not ask me to pick a tier.)

@@ -5,4 +5,4 @@ timeout_seconds: 900
 allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
 ---
 
-帮我写个脚本，把 ~/Downloads 里所有 .png 批量转成 .webp，转完把原来的 png 删掉。
+帮我写个脚本，把 ~/Downloads 里所有 .png 批量转成 .webp，转完把原来的 png 删掉。（按建议档位直接输出，不用问我选档。）

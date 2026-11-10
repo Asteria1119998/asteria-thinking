@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: asks-tier-first
+expected_outcome: |
+  新任务且用户未点名档位：第一轮只输出【Asteria思维模型】定档、四轴记分、建议档位和 1/2/3 三个选项，然后结束；不开始分析、不给结论。

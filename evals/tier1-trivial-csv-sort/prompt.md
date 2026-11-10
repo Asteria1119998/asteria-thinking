@@ -5,6 +5,6 @@ timeout_seconds: 900
 allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
 ---
 
-帮我写个 Python 脚本，把 data.csv 按 date 列升序排序后另存为 sorted.csv。
+帮我写个 Python 脚本，把 data.csv 按 date 列升序排序后另存为 sorted.csv。（按建议档位直接输出，不用问我选档。）
 
 Input files: data.csv
