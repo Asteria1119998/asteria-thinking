@@ -68,9 +68,19 @@
 - 一个模糊需求要先变成可执行的规格
 - 检索、RAG、证据查找类任务（需要打破否定盲区时）
 
-## 安装与使用
+## 安装
 
-下载仓库 ZIP → 解压 → **把文件夹改名为 `asteria-thinking`**（Claude Code 要求文件夹名与 SKILL.md 的 name 一致；调用方式 `/asteria-thinking`）→ 放进 skills 目录或上传。其他平台用户把 `portable-core.md` 复制到系统提示即可，横幅与档位规则在便携版里同样生效。
+**Claude Code**（推荐，可更新）：
+
+```bash
+git clone https://github.com/Asteria1119998/asteria-thinking ~/.claude/skills/asteria-thinking
+```
+
+新开会话即可：输入 `/asteria-thinking 你的问题`，或在匹配的问题上自动触发。更新：`git -C ~/.claude/skills/asteria-thinking pull`。要给某个项目的所有协作者用：把 Release 的 asteria-thinking.zip 解压到该项目的 `.claude/skills/` 下（得到不含 .git 的 `.claude/skills/asteria-thinking/`），提交进项目，clone 项目的人就自动拥有；更新时重新解压覆盖。不要在项目里直接 `git clone` 本仓库——外层项目只会记录一个指针，别人 clone 下来是空目录。
+
+**claude.ai / Claude Desktop**：到 [Releases](https://github.com/Asteria1119998/asteria-thinking/releases) 下载 `asteria-thinking.zip`，在设置里的 Skills 上传。这个 zip 的顶层就是 `asteria-thinking/` 文件夹；不要用 GitHub 自动生成的 Source code zip——它解压出来叫 `asteria-thinking-main`，Claude 要求文件夹名与 SKILL.md 的 `name` 一致。
+
+**其他平台（GPT、Grok）**：把 `portable-core.md` 的内容贴进系统提示或 Custom Instructions。横幅、档位、总图规则在便携版里同样生效，校验器在那边跑不了。
 
 ## 文件
 
